@@ -1,0 +1,71 @@
+﻿databases:
+  - name: xebia-lms-db
+    databaseName: learning_platform
+    plan: free
+    region: oregon
+
+services:
+  - type: redis
+    name: xebia-lms-redis
+    plan: free
+    region: oregon
+    ipAllowList:
+      - source: 0.0.0.0/0
+        description: everywhere
+
+  - type: web
+    name: xebia-lms-backend
+    runtime: docker
+    region: oregon
+    plan: free
+    rootDir: backend/learning_management
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/status
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: xebia-lms-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: xebia-lms-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: xebia-lms-db
+          property: database
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: xebia-lms-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: xebia-lms-db
+          property: password
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: xebia-lms-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+
+  - type: web
+    name: xebia-lms-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://xebia-lms-backend-yrcs.onrender.com/api
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

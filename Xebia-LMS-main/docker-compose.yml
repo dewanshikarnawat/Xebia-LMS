@@ -1,0 +1,19 @@
+services:
+
+  backend:
+    image: karann24/xebia-lms-backend:latest
+    container_name: xebia-lms-backend
+    env_file:
+      - ./backend/learning_management/.env
+    expose:
+      - "8080"
+    restart: unless-stopped
+
+  frontend:
+    image: karann24/xebia-lms-frontend:latest
+    container_name: xebia-lms-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

@@ -1,0 +1,320 @@
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Variables ─────────────────────────────────────────────────────── */
+:root {
+  --brand-primary: #4A1F4F;
+  --brand-primary-dark: #622865;
+  --brand-secondary: #7A2676;
+  --brand-success: #10B981;
+  --brand-cta: #4A1F4F;
+  --brand-border: #E6E8F0;
+  --brand-surface: #F6F7FB;
+  --brand-background: #FFFFFF;
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --accent-teal: #A855F7;
+  --accent-teal-dark: #7A2676;
+  --accent-orange: #F59E0B;
+  --accent-purple: #4A1F4F;
+  --accent-pink: #EF4444;
+  --accent-plum: #4A1F4F;
+}
+
+.dark {
+  --brand-border: #334155;
+  --brand-surface: #0F172A;
+  --brand-background: #0B0F19;
+  --card-background: #1E293B;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background-color: var(--brand-surface);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dark body {
+  background-color: #0b0f19;
+  color: #f8fafc;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #4A1F4F22;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4A1F4F44;
+}
+
+/* ─── Focus ─────────────────────────────────────────────────────────────── */
+*:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+input, input:focus, input:focus-visible,
+textarea, textarea:focus, textarea:focus-visible,
+select, select:focus, select:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ─── Shimmer Skeleton ──────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+.dark .skeleton {
+  background: linear-gradient(90deg, #1e293b 25%, #273548 50%, #1e293b 75%);
+  background-size: 200% 100%;
+}
+
+/* ─── Upload Drop Zone ──────────────────────────────────────────────────── */
+.drop-zone {
+  border: 2px dashed var(--brand-border);
+  border-radius: 1rem;
+  transition: all 0.2s ease;
+}
+.drop-zone:hover, .drop-zone.dragging {
+  border-color: var(--brand-primary);
+  background-color: #F5EAF8;
+}
+
+/* ─── Sidebar Transition ────────────────────────────────────────────────── */
+.sidebar-transition {
+  transition: transform 0.3s ease, width 0.3s ease;
+}
+
+/* ─── Card Hover ────────────────────────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(74, 31, 79, 0.08), 0 8px 10px -6px rgba(74, 31, 79, 0.08);
+}
+.dark .card-hover:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Progress Bar ──────────────────────────────────────────────────────── */
+.progress-bar {
+  transition: width 0.4s ease;
+}
+
+/* ─── Table ─────────────────────────────────────────────────────────────── */
+.table-row-hover:hover {
+  background-color: rgba(37, 99, 235, 0.02);
+}
+.dark .table-row-hover:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* ─── Modern Search Bar ────────────────────────────────────────────────── */
+.search-bar-modern {
+  height: 2.75rem !important; /* 44px height */
+  border-radius: 9999px !important; /* pill shape */
+  padding-left: 2.5rem !important;
+  padding-right: 1.25rem !important;
+  font-size: 0.875rem !important;
+  background-color: var(--brand-background) !important;
+  border: 1px solid var(--brand-border) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02) !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+.search-bar-modern:focus {
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+}
+
+/* ─── Global Focus Ring & Input/Dropdown Radius ──────────────────────── */
+input.rounded-xl, select.rounded-xl, textarea.rounded-xl {
+  border-radius: 14px !important; /* 14px inputs */
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+}
+
+/* ─── Global Card & Table Radius ───────────────────────────────────────── */
+.rounded-2xl {
+  border-radius: 18px !important; /* 18px cards and tables */
+}
+
+/* ─── Floating Card Shadows ────────────────────────────────────────────── */
+.shadow-sm {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+.shadow-md {
+  box-shadow: 0 8px 24px rgba(74, 31, 79, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+}
+.shadow-lg {
+  box-shadow: 0 16px 36px rgba(74, 31, 79, 0.06), 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* ─── Table Modernization ───────────────────────────────────────────────── */
+main table {
+  width: 100%;
+  border-collapse: collapse;
+}
+main table th {
+  padding: 14px 16px !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.05em !important;
+  color: var(--text-secondary) !important;
+  border-bottom: 1px solid var(--brand-border) !important;
+  background-color: rgba(248, 250, 252, 0.6) !important;
+}
+.dark main table th {
+  background-color: rgba(30, 41, 59, 0.3) !important;
+}
+main table td {
+  padding: 16px !important;
+  font-size: 0.875rem !important;
+  border-bottom: 1px solid var(--brand-border) !important;
+}
+main table tbody tr {
+  transition: background-color 0.15s ease !important;
+}
+main table tbody tr:hover {
+  background-color: rgba(37, 99, 235, 0.02) !important;
+}
+.dark main table tr:hover {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+main table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* ─── Responsive Enhancements ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Prevent tables from shrinking too much on mobile and enable smooth scroll */
+  main table {
+    min-width: 680px !important;
+  }
+  
+  /* Responsive typography scaling */
+  h1 {
+    font-size: 1.5rem !important;
+  }
+  h2 {
+    font-size: 1.25rem !important;
+  }
+  .text-3xl {
+    font-size: 1.75rem !important;
+  }
+  .text-4xl {
+    font-size: 2rem !important;
+  }
+  
+  /* Mobile padding optimization */
+  main {
+    padding: 1rem !important;
+  }
+}
+
+/* Responsive Image and Icon scaling */
+img, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ─── Premium Landing/Auth Redesign Animations ───────────────────────────── */
+@keyframes blob-float {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+@keyframes grid-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+@keyframes text-shine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-blob-1 {
+  animation: blob-float 15s infinite ease-in-out;
+}
+
+.animate-blob-2 {
+  animation: blob-float 12s infinite ease-in-out 2s;
+}
+
+.animate-blob-3 {
+  animation: blob-float 18s infinite ease-in-out 4s;
+}
+
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+}
+
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.text-gradient-primary {
+  background: linear-gradient(135deg, #4A1F4F 0%, #2563EB 50%, #0B7F76 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shine 6s linear infinite;
+}
+
+.dark .text-gradient-primary {
+  background: linear-gradient(135deg, #E2E8F0 0%, #A855F7 50%, #60A5FA 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shine 6s linear infinite;
+}
+
